@@ -21,8 +21,9 @@ const AboutPage = ({ doc, menu, locale }) => {
 
 export const getStaticProps = async (props) => {
     console.log(props)
+    const ref = props.previewData ? props.previewData.ref : null
     const client = Client();
-    const doc = await client.getSingle('about_page', { lang: props.locale })
+    const doc = await client.getSingle('about_page', ref ? { ref, lang: props.locale } : { lang: props.locale })
     const menu = await client.getSingle('top_menu', { lang: props.locale })
     return {
         props: {
